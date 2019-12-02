@@ -1,0 +1,5 @@
+(executable
+ (name ffi_stubgen)
+ (modules ffi_stubgen)
+ (libraries babeltrace1_bindings ctypes.stubs ctypes)
+)

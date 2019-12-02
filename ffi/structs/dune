@@ -1,0 +1,18 @@
+(rule
+  (targets structs_stubgen.c)
+  (deps driver.exe)
+  (action (with-stdout-to %{targets} (run %{deps} -c)))
+)
+
+(executable
+ (name driver)
+ (modules driver)
+ (libraries babeltrace1_types ctypes.stubs ctypes)
+)
+
+(library
+ (name babeltrace1_types)
+ (public_name babeltrace1.types)
+ (modules babeltrace1_types)
+ (libraries ctypes.stubs ctypes)
+)

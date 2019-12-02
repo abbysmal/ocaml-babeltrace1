@@ -1,0 +1,5 @@
+(library
+ (name babeltrace1)
+ (public_name babeltrace1)
+ (libraries babeltrace1.ffi astring rresult)
+)

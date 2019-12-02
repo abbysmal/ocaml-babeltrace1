@@ -1,0 +1,10 @@
+(executables
+ (names test)
+ (libraries babeltrace1 astring rresult bos cryptokit alcotest)
+)
+
+(alias
+ (name    runtest)
+ (deps    test.exe)
+ (action (run %{deps}))
+)

@@ -1,0 +1,26 @@
+(rule
+ (targets g.ml)
+ (deps ../stubgen/ffi_stubgen.exe)
+ (action (with-stdout-to %{targets} (run %{deps} -ml))))
+
+(rule
+ (targets babeltrace1_stubs.c)
+ (deps ../stubgen/ffi_stubgen.exe)
+ (action (with-stdout-to %{targets} (run %{deps} -c)))
+)
+
+(library
+ (name babeltrace1_ffi)
+ (public_name babeltrace1.ffi)
+ (modules g m)
+ (c_names babeltrace1_stubs)
+ (flags (:standard -w -9-27-32-34))
+ (c_library_flags (:include c_library_flags.sexp))
+ (c_flags (:include c_flags.sexp) -Wno-discarded-qualifiers)
+ (libraries babeltrace1.bindings ctypes.stubs ctypes)
+)
+
+(rule
+ (targets c_flags.sexp c_library_flags.sexp c_flags.txt c_library_flags.txt)
+ (deps    (:discover config/discover.exe))
+ (action  (run %{discover})))

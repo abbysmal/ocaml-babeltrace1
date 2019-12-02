@@ -1,0 +1,25 @@
+(rule
+ (targets structs_stubgen.exe)
+ (deps structs_stubgen.o)
+ (action (run %{cc} %{deps} -o %{targets}))
+)
+
+(rule
+ (targets t.ml)
+ (deps structs_stubgen.exe)
+ (action (with-stdout-to %{targets} (run %{deps} -c)))
+ )
+
+(rule
+ (deps ../lib/c_flags.txt ../structs/structs_stubgen.c)
+ (targets structs_stubgen.o)
+ (action (run ./stubgen.sh))
+)
+
+(library
+ (name babeltrace1_bindings)
+ (public_name babeltrace1.bindings)
+ (flags (:standard -w no-unused-parameter))
+ (synopsis "Ctypes bindings that describe the libbabeltrace FFI")
+ (modules babeltrace1_bindings views t)
+ (libraries babeltrace1_types ctypes.stubs ctypes))

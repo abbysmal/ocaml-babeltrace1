@@ -1,0 +1,25 @@
+opam-version: "1.2"
+maintainer: "Enguerrand Decorne <decorne.en@gmail.com>"
+authors: ["Enguerrand Decorne <decorne.en@gmail.com>"]
+homepage: "https://github.com/Engil/ocaml-babeltrace1"
+doc: "https://engil.github.io/ocaml-babeltrace1"
+license: "MIT"
+dev-repo: "https://github.com/Engil/ocaml-babeltrace1.git"
+bug-reports: "https://github.com/Engil/ocaml-babeltrace1/issues"
+available: [ ocaml-version >= "4.06.0"]
+depends: [
+  "dune" {build}
+  "ctypes" {>="0.12.0"}
+  "astring"
+  "rresult"
+  "bos" {test}
+  "cryptokit" {test}
+  "alcotest" {test}
+]
+build: [
+  ["dune" "subst"] {pinned}
+  ["dune" "build" "-p" name "-j" jobs]
+]
+build-test: [
+  ["dune" "runtest"]
+]
