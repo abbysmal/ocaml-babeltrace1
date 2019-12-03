@@ -1,4 +1,4 @@
-opam-version: "1.2"
+opam-version: "2.0"
 maintainer: "Enguerrand Decorne <decorne.en@gmail.com>"
 authors: ["Enguerrand Decorne <decorne.en@gmail.com>"]
 homepage: "https://github.com/Engil/ocaml-babeltrace1"
@@ -15,6 +15,7 @@ depends: [
   "bos" {test}
   "cryptokit" {test}
   "alcotest" {test}
+  "junit_alcotest" {test}
 ]
 build: [
   ["dune" "subst"] {pinned}
@@ -23,3 +24,4 @@ build: [
 build-test: [
   ["dune" "runtest"]
 ]
+synopsis: "Binding to the babeltrace library"

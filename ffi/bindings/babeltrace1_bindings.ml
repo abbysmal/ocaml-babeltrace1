@@ -1,6 +1,6 @@
 module T = Babeltrace1_types.Struct_stubs(T)
 
-module M(F: Cstubs.FOREIGN) = struct
+module M(F: Ctypes.FOREIGN) = struct
 
   module V = Views
   open V

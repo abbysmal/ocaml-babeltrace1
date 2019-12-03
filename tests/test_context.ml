@@ -7,7 +7,7 @@ let create_context () = Bt.create_context () >>= fun _ -> Ok ()
 let add_trace () =
   Bt.create_context ()
   >>= fun ctx ->
-  Bt.add_trace ctx `Ctf "brokentest"
+  Bt.add_trace ctx `Ctf "assets/"
   >>= fun id ->
   Printf.printf "1\n";
   let iter = Bt.Ctf.create_iter ctx in
