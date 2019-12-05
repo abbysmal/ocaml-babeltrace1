@@ -14,7 +14,8 @@ let add_trace () =
   Printf.printf "1\n";
   let ev = Bt.Ctf.read_event iter in
   Printf.printf "1\n";
-  (Printf.printf "%s\n" (match Bt.Ctf.Events.get_name ev with Some s -> s | None -> "mndr"));
+  (match Bt.Ctf.Events.get_name ev with Some s -> Error (`Msg s) | None -> Ok ())
+  >>= fun () ->
   Bt.remove_trace ctx id
   >>= fun () ->
   Ok ()

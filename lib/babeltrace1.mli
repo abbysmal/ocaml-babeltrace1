@@ -19,6 +19,7 @@ module Ctf : sig
 
   type ctf_iter
   type ctf_event
+  type ctf_scope = Babeltrace1_types.ctf_scope
 
   val create_iter : context -> ctf_iter
 
@@ -28,7 +29,11 @@ module Ctf : sig
 
   module Events : sig
 
-    val get_name : ctf_event -> string option
+    type event_scope
+
+    val event_name : ctf_event -> string option
+    val get_top_level_scope : ctf_event -> ctf_scope -> event_scope
+    val get_field_list : ctf_event -> event_scope -> unit
 
   end
 

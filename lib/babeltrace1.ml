@@ -39,6 +39,7 @@ module Ctf = struct
 
   type ctf_iter = Bt.Ctf.ctf_iter
   type ctf_event = Bt.Ctf.ctf_event
+  type ctf_scope = Babeltrace1_types.ctf_scope
 
   let create_iter ctx = Bt.Ctf.iter_create ctx C.null C.null
 
@@ -48,7 +49,20 @@ module Ctf = struct
 
   module Events = struct
 
-    let get_name event = Bt.Ctf.Events.event_name event
+    module E = Bt.Ctf.Events
+
+    type event_scope = Bt.Context.definition
+
+    let event_name  = E.event_name
+
+    let get_top_level_scope = E.get_top_level_scope
+
+    let get_field_list event scope =
+      let i = Unsigned.UInt.zero in
+      let i = C.(allocate uint i) in
+      let p = C.(allocate Bt.Context.definition null) in
+      let pp = C.(allocate (ptr Bt.Context.definition) p) in
+      E.get_field_list event scope pp i
 
   end
 

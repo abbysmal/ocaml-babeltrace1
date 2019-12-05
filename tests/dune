@@ -1,10 +1,4 @@
-(executables
- (names test)
- (libraries babeltrace1 astring rresult bos cryptokit alcotest)
-)
-
-(alias
- (name    runtest)
- (deps    test.exe)
- (action (run %{deps}))
-)
+(test
+ (name test)
+ (libraries babeltrace1 astring rresult bos cryptokit alcotest junit_alcotest)
+ (deps (source_tree assets)))

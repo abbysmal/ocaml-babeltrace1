@@ -8,6 +8,8 @@ let check (name, fn) = name, `Quick, (fun () -> Alcotest.check t name (Ok ()) (f
 let test_context = List.map check Test_context.tests
 
 let () =
-  Alcotest.run "Babeltrace1 binding" [
+  Junit_alcotest.run_and_report "Babeltrace" [
     "test_context", test_context;
   ]
+  |> fun (r, _) ->
+  Junit.(to_file (make [r]) "alcotest-junit.xml")
